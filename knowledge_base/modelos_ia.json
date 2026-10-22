@@ -1,4 +1,870 @@
 {
-  "descripcion": "Chatbot interno sobre documentos confidenciales con poco hardware",
-  "hechos": ["quiere_generar_texto", "tiene_documentos_internos", "privacidad_estricta", "presupuesto_gpu_bajo"]
+  "dominio": "Selección y Despliegue de Modelos de IA y MLOps",
+  "descripcion": "Sistema de apoyo académico para evaluar requisitos de modelos de IA, recursos de inferencia, calidad y despliegue.",
+  "reglas": [
+    {
+      "id": "R01",
+      "nombre": "Identificar una tarea de generación de texto",
+      "antecedentes": [
+        "tarea_generacion_texto"
+      ],
+      "consecuentes": [
+        "caso_uso_llm",
+        "clasificacion_tarea_generativa"
+      ],
+      "prioridad": 70
+    },
+    {
+      "id": "R02",
+      "nombre": "Priorizar evaluación reproducible",
+      "antecedentes": [
+        "caso_uso_llm",
+        "datos_evaluacion"
+      ],
+      "consecuentes": [
+        "evaluacion_llm_reproducible"
+      ],
+      "prioridad": 85
+    },
+    {
+      "id": "R03",
+      "nombre": "Evaluar necesidad de contexto extenso",
+      "antecedentes": [
+        "caso_uso_llm",
+        "contexto_largo"
+      ],
+      "consecuentes": [
+        "requisito_contexto_extenso"
+      ],
+      "prioridad": 80
+    },
+    {
+      "id": "R04",
+      "nombre": "Identificar requisito de entorno controlado",
+      "antecedentes": [
+        "privacidad_datos",
+        "datos_sensibles"
+      ],
+      "consecuentes": [
+        "requisito_entorno_controlado"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R05",
+      "nombre": "Evaluar modelo de pesos abiertos",
+      "antecedentes": [
+        "modelo_abierto",
+        "requisito_entorno_controlado"
+      ],
+      "consecuentes": [
+        "evaluar_llm_autohospedado"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R06",
+      "nombre": "Detectar restricción de memoria GPU",
+      "antecedentes": [
+        "gpu_disponible",
+        "vram_limitada"
+      ],
+      "consecuentes": [
+        "restriccion_memoria_gpu"
+      ],
+      "prioridad": 80
+    },
+    {
+      "id": "R07",
+      "nombre": "Evaluar cuantización",
+      "antecedentes": [
+        "restriccion_memoria_gpu",
+        "presupuesto_bajo"
+      ],
+      "consecuentes": [
+        "evaluar_cuantizacion"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R08",
+      "nombre": "Optimizar servicio de inferencia",
+      "antecedentes": [
+        "latencia_estricta",
+        "alto_volumen_solicitudes"
+      ],
+      "consecuentes": [
+        "optimizar_serving_y_batching"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R09",
+      "nombre": "Establecer umbral de calidad",
+      "antecedentes": [
+        "calidad_critica",
+        "evaluacion_llm_reproducible"
+      ],
+      "consecuentes": [
+        "establecer_umbral_calidad"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R10",
+      "nombre": "Preparar pipeline con versionado",
+      "antecedentes": [
+        "despliegue_produccion",
+        "versionado_modelos"
+      ],
+      "consecuentes": [
+        "pipeline_mlops_versionado"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R11",
+      "nombre": "Validar privacidad y control de acceso",
+      "antecedentes": [
+        "requisito_entorno_controlado",
+        "despliegue_produccion"
+      ],
+      "consecuentes": [
+        "validar_privacidad_y_control_acceso"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R12",
+      "nombre": "Preparar perfil eficiente de inferencia",
+      "antecedentes": [
+        "evaluar_cuantizacion",
+        "optimizar_serving_y_batching"
+      ],
+      "consecuentes": [
+        "perfil_inferencia_eficiente"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R13",
+      "nombre": "Comparar calidad entre precisiones",
+      "antecedentes": [
+        "evaluar_cuantizacion",
+        "establecer_umbral_calidad"
+      ],
+      "consecuentes": [
+        "comparar_calidad_fp16_int8_int4"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R14",
+      "nombre": "Gestionar deriva del modelo",
+      "antecedentes": [
+        "drift_detectado",
+        "pipeline_mlops_versionado"
+      ],
+      "consecuentes": [
+        "reentrenamiento_o_reversion_controlada"
+      ],
+      "prioridad": 100
+    },
+    {
+      "id": "R15",
+      "nombre": "Recomendar despliegue gradual",
+      "antecedentes": [
+        "pipeline_mlops_versionado",
+        "establecer_umbral_calidad"
+      ],
+      "consecuentes": [
+        "despliegue_canary_con_rollback"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R16",
+      "nombre": "Seleccionar modelo autohospedado validado",
+      "antecedentes": [
+        "evaluar_llm_autohospedado",
+        "comparar_calidad_fp16_int8_int4"
+      ],
+      "consecuentes": [
+        "seleccionar_modelo_autohospedado_validado"
+      ],
+      "prioridad": 95
+    },
+    {
+      "id": "R17",
+      "nombre": "Registrar métricas de producción",
+      "antecedentes": [
+        "despliegue_produccion",
+        "evaluacion_llm_reproducible"
+      ],
+      "consecuentes": [
+        "registrar_metricas_coste_latencia_calidad"
+      ],
+      "prioridad": 85
+    },
+    {
+      "id": "R18",
+      "nombre": "Consolidar ciclo MLOps observable",
+      "antecedentes": [
+        "despliegue_canary_con_rollback",
+        "registrar_metricas_coste_latencia_calidad"
+      ],
+      "consecuentes": [
+        "ciclo_mlops_observable"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R19",
+      "nombre": "Recomendar API gestionada para calidad o contexto extenso",
+      "antecedentes": [
+        "clasificacion_tarea_generativa",
+        "calidad_critica"
+      ],
+      "consecuentes": [
+        "seleccion_api_calidad"
+      ],
+      "prioridad": 90
+    },
+    {
+      "id": "R20",
+      "nombre": "Recomendar modelo local económico con VRAM limitada",
+      "antecedentes": [
+        "clasificacion_tarea_generativa",
+        "presupuesto_bajo",
+        "modelo_abierto",
+        "gpu_disponible",
+        "vram_limitada"
+      ],
+      "consecuentes": [
+        "seleccion_local_economica"
+      ],
+      "prioridad": 100
+    },
+    {
+      "id": "R21",
+      "nombre": "Recomendar modelo local por privacidad",
+      "antecedentes": [
+        "clasificacion_tarea_generativa",
+        "privacidad_datos",
+        "datos_sensibles",
+        "modelo_abierto"
+      ],
+      "consecuentes": [
+        "seleccion_local_privacidad"
+      ],
+      "prioridad": 110
+    },
+    {
+      "id": "R22",
+      "nombre": "Recomendar modelo y serving para baja latencia",
+      "antecedentes": [
+        "clasificacion_tarea_generativa",
+        "latencia_estricta",
+        "alto_volumen_solicitudes"
+      ],
+      "consecuentes": [
+        "seleccion_modelo_baja_latencia"
+      ],
+      "prioridad": 95
+    }
+  ],
+  "soluciones": {
+    "caso_uso_llm": {
+      "titulo": "Recomendación inicial de modelo para generación de texto",
+      "tipo": "Diagnóstico",
+      "problema": "La tarea requiere generación de texto, pero todavía no se han indicado todas las restricciones de infraestructura, privacidad, costo y latencia.",
+      "solucion": "Si necesitas empezar con una opción concreta, prueba GPT-5 mediante API cuando priorices calidad y facilidad de integración. Si necesitas ejecutar el modelo en infraestructura propia o controlar los datos, prueba Qwen3-8B como candidato de pesos abiertos. No son una elección definitiva: las reglas adicionales del sistema ajustan la recomendación según presupuesto, privacidad, VRAM, contexto y latencia.",
+      "prioridad": "Media",
+      "pasos": [
+        "Usa GPT-5 API como primer candidato si puedes procesar datos mediante un proveedor externo aprobado.",
+        "Usa Qwen3-8B como primer candidato local si tienes infraestructura compatible.",
+        "Activa las condiciones de privacidad, presupuesto, GPU/VRAM, contexto y latencia para afinar la recomendación.",
+        "Compara ambos candidatos con ejemplos reales antes de decidir."
+      ],
+      "componentes": [
+        "GPT-5 mediante API",
+        "Qwen3-8B autohospedado",
+        "Conjunto de evaluación propio"
+      ]
+    },
+    "evaluacion_llm_reproducible": {
+      "titulo": "Preparar evaluación reproducible",
+      "tipo": "Acción",
+      "problema": "Existe un conjunto de evaluación para comparar resultados.",
+      "solucion": "Crear una evaluación repetible con datos versionados, métricas y criterios de aceptación definidos antes de desplegar.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Separar datos de prueba de los usados para ajustar el sistema.",
+        "Definir métricas automáticas y revisión humana cuando corresponda.",
+        "Registrar versión del modelo, parámetros y resultados.",
+        "Repetir la evaluación ante cada cambio."
+      ],
+      "componentes": [
+        "Dataset versionado",
+        "Pipeline de evaluación",
+        "Registro de experimentos"
+      ]
+    },
+    "requisito_contexto_extenso": {
+      "titulo": "Evaluar modelos con contexto largo",
+      "tipo": "Acción",
+      "problema": "La aplicación necesita procesar entradas extensas.",
+      "solucion": "Comparar modelos que soporten el tamaño de contexto requerido y medir consumo de memoria, latencia y calidad con documentos reales.",
+      "prioridad": "Media",
+      "pasos": [
+        "Medir longitud típica y máxima de las entradas.",
+        "Probar recuperación de información en distintas posiciones del contexto.",
+        "Medir memoria y latencia con la longitud objetivo.",
+        "Considerar recuperación aumentada (RAG) si no es necesario enviar todo el documento al modelo."
+      ],
+      "componentes": [
+        "Modelo compatible con contexto requerido",
+        "Pruebas de contexto",
+        "Índice vectorial si se usa RAG"
+      ]
+    },
+    "requisito_entorno_controlado": {
+      "titulo": "Diseñar entorno controlado para datos sensibles",
+      "tipo": "Requisito",
+      "problema": "Los datos sensibles requieren controles estrictos.",
+      "solucion": "Definir dónde se procesan los datos, quién puede acceder, cuánto tiempo se conservan y cómo se eliminan; revisar obligaciones aplicables.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Clasificar los datos y minimizar los campos enviados al modelo.",
+        "Definir cifrado en tránsito y reposo.",
+        "Aplicar control de acceso por roles y auditoría.",
+        "Revisar retención, anonimización y contratos del proveedor."
+      ],
+      "componentes": [
+        "IAM",
+        "Cifrado",
+        "Auditoría",
+        "Gestión de secretos"
+      ]
+    },
+    "evaluar_llm_autohospedado": {
+      "titulo": "Evaluar un LLM autohospedado",
+      "tipo": "Acción",
+      "problema": "Se prefieren pesos abiertos y existe requisito de entorno controlado.",
+      "solucion": "Comparar modelos que puedan ejecutarse en la infraestructura disponible; validar licencia, calidad, consumo y requisitos operativos antes de seleccionarlos.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Crear una lista corta de modelos compatibles con la tarea y licencia.",
+        "Probarlos con el dataset de evaluación.",
+        "Medir VRAM, tokens por segundo, latencia y costo operativo.",
+        "Elegir solo tras cumplir umbrales de calidad y privacidad."
+      ],
+      "componentes": [
+        "Servidor de inferencia",
+        "GPU/CPU disponible",
+        "Registro de modelos"
+      ]
+    },
+    "restriccion_memoria_gpu": {
+      "titulo": "Evaluar la restricción de VRAM",
+      "tipo": "Hallazgo",
+      "problema": "La GPU disponible tiene memoria limitada para la carga prevista.",
+      "solucion": "Medir memoria usada por pesos, contexto, caché KV y concurrencia; probar tamaños de lote y precisiones antes de fijar el modelo.",
+      "prioridad": "Media",
+      "pasos": [
+        "Registrar VRAM disponible y reservada.",
+        "Medir consumo con la longitud de contexto objetivo.",
+        "Probar concurrencia realista.",
+        "Definir margen de memoria para evitar fallos."
+      ],
+      "componentes": [
+        "GPU",
+        "Herramientas de perfilado",
+        "Servidor de inferencia"
+      ]
+    },
+    "evaluar_cuantizacion": {
+      "titulo": "Evaluar cuantización del modelo",
+      "tipo": "Acción",
+      "problema": "El presupuesto y la VRAM son limitados.",
+      "solucion": "Comparar versiones cuantizadas con el modelo de referencia, midiendo calidad, memoria, velocidad y estabilidad; no elegir por memoria únicamente.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Seleccionar formatos o precisiones candidatos.",
+        "Ejecutar el mismo dataset de evaluación.",
+        "Comparar calidad, latencia, VRAM y costo.",
+        "Aceptar la cuantización solo si cumple los umbrales definidos."
+      ],
+      "componentes": [
+        "Modelo base",
+        "Variantes cuantizadas",
+        "Dataset de evaluación"
+      ]
+    },
+    "optimizar_serving_y_batching": {
+      "titulo": "Optimizar el servicio de inferencia",
+      "tipo": "Acción",
+      "problema": "Se exige baja latencia y se esperan muchas solicitudes.",
+      "solucion": "Perfilar el servicio y probar concurrencia, batching dinámico, límites de cola y escalado según el patrón de tráfico.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Medir latencia p50/p95/p99 y solicitudes por segundo.",
+        "Probar batching sin incumplir la latencia objetivo.",
+        "Configurar límites de cola y timeouts.",
+        "Evaluar escalado horizontal y capacidad por GPU."
+      ],
+      "componentes": [
+        "Servidor de inferencia",
+        "Balanceador",
+        "Métricas de latencia y throughput"
+      ]
+    },
+    "establecer_umbral_calidad": {
+      "titulo": "Definir umbrales de calidad",
+      "tipo": "Acción",
+      "problema": "La calidad es crítica y hay evaluación reproducible.",
+      "solucion": "Definir criterios mínimos de aceptación y pruebas de regresión; bloquear una versión si degrada métricas críticas.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Elegir métricas adecuadas a la tarea.",
+        "Establecer umbrales con responsables del producto.",
+        "Incluir pruebas de seguridad y casos límite.",
+        "Versionar resultados y revisar excepciones."
+      ],
+      "componentes": [
+        "Dataset de evaluación",
+        "Pipeline CI/CD",
+        "Registro de métricas"
+      ]
+    },
+    "pipeline_mlops_versionado": {
+      "titulo": "Crear pipeline MLOps versionado",
+      "tipo": "Acción",
+      "problema": "El modelo se desplegará en producción y hay versionado.",
+      "solucion": "Automatizar validación, registro, aprobación y despliegue de versiones de modelos, datos, prompts y configuración.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Versionar artefactos y parámetros.",
+        "Ejecutar evaluación automática en cada candidato.",
+        "Exigir aprobación antes de producción.",
+        "Mantener una versión anterior recuperable."
+      ],
+      "componentes": [
+        "Repositorio de modelos",
+        "CI/CD",
+        "Registro de artefactos"
+      ]
+    },
+    "validar_privacidad_y_control_acceso": {
+      "titulo": "Validar privacidad y acceso en producción",
+      "tipo": "Acción",
+      "problema": "Un modelo en producción procesa datos sensibles o sujetos a privacidad estricta.",
+      "solucion": "Aplicar mínimo privilegio, protección de secretos, cifrado, auditoría y políticas de retención; comprobar que los logs no expongan datos sensibles.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Revisar roles de servicio y usuarios.",
+        "Eliminar secretos de código y logs.",
+        "Probar controles de acceso y cifrado.",
+        "Documentar retención y respuesta a incidentes."
+      ],
+      "componentes": [
+        "IAM",
+        "Gestión de secretos",
+        "Cifrado",
+        "Auditoría"
+      ]
+    },
+    "perfil_inferencia_eficiente": {
+      "titulo": "Configurar perfil de inferencia eficiente",
+      "tipo": "Recomendación",
+      "problema": "Se requiere equilibrar costo, latencia y consumo de memoria.",
+      "solucion": "Seleccionar la combinación de modelo, cuantización, batching y concurrencia que cumpla las métricas objetivo.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Comparar perfiles bajo carga representativa.",
+        "Registrar costo por solicitud y latencia.",
+        "Definir límites de concurrencia y memoria.",
+        "Repetir pruebas después de cambios de modelo."
+      ],
+      "componentes": [
+        "Servidor de inferencia",
+        "Herramientas de monitoreo",
+        "Pruebas de carga"
+      ]
+    },
+    "comparar_calidad_fp16_int8_int4": {
+      "titulo": "Comparar calidad entre precisiones",
+      "tipo": "Acción",
+      "problema": "Se evalúa cuantización y hay umbrales de calidad.",
+      "solucion": "Ejecutar pruebas equivalentes en las precisiones disponibles y elegir la más eficiente que mantenga la calidad aceptable.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Usar el mismo dataset y configuración.",
+        "Comparar exactitud o rúbricas de calidad relevantes.",
+        "Medir latencia, memoria y costo.",
+        "Registrar la decisión y limitaciones."
+      ],
+      "componentes": [
+        "Modelos FP16/INT8/INT4 disponibles",
+        "Dataset de evaluación"
+      ]
+    },
+    "reentrenamiento_o_reversion_controlada": {
+      "titulo": "Responder a deriva del modelo",
+      "tipo": "Acción",
+      "problema": "Se detectó deriva y existe un pipeline versionado.",
+      "solucion": "Investigar si la deriva afecta calidad o distribución de datos; decidir entre reentrenamiento, ajuste, cambio de umbral o reversión según evidencia.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Confirmar que la alerta de deriva es válida.",
+        "Comparar métricas actuales con la línea base.",
+        "Evaluar datos recientes y posibles causas.",
+        "Probar una nueva versión antes de producción o revertir si hay degradación."
+      ],
+      "componentes": [
+        "Monitoreo",
+        "Pipeline de entrenamiento",
+        "Registro de versiones"
+      ]
+    },
+    "despliegue_canary_con_rollback": {
+      "titulo": "Desplegar gradualmente con rollback",
+      "tipo": "Acción",
+      "problema": "Existe pipeline versionado y umbrales de calidad.",
+      "solucion": "Enviar una proporción limitada del tráfico a la nueva versión y aumentar gradualmente si cumple métricas; revertir si incumple los umbrales.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Definir porcentaje inicial y criterios de avance.",
+        "Monitorear errores, latencia, costo y calidad.",
+        "Aumentar tráfico por etapas.",
+        "Probar el procedimiento de rollback."
+      ],
+      "componentes": [
+        "Gateway o enrutador de tráfico",
+        "Monitoreo",
+        "Versiones de modelo"
+      ]
+    },
+    "seleccionar_modelo_autohospedado_validado": {
+      "titulo": "Seleccionar modelo autohospedado validado",
+      "tipo": "Recomendación",
+      "problema": "Se evaluó el alojamiento propio y las variantes de precisión.",
+      "solucion": "Seleccionar el candidato que cumpla calidad, licencia, privacidad, memoria, latencia y costo; documentar por qué se descartan las alternativas.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Revisar resultados de evaluación y licencia.",
+        "Verificar capacidad de hardware y concurrencia.",
+        "Documentar riesgos y limitaciones.",
+        "Aprobar una versión concreta y mantener alternativa de reversión."
+      ],
+      "componentes": [
+        "Registro de modelos",
+        "Servidor de inferencia",
+        "Informe de evaluación"
+      ]
+    },
+    "registrar_metricas_coste_latencia_calidad": {
+      "titulo": "Registrar métricas de producción",
+      "tipo": "Acción",
+      "problema": "El modelo se desplegará y necesita evaluación continua.",
+      "solucion": "Medir latencia, volumen, errores, costo y señales de calidad con protección de datos; establecer alertas y responsables.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Definir métricas y umbrales.",
+        "Evitar registrar prompts o datos sensibles innecesarios.",
+        "Configurar paneles y alertas.",
+        "Revisar tendencias y asociarlas con versiones del modelo."
+      ],
+      "componentes": [
+        "Sistema de observabilidad",
+        "Registro de versiones",
+        "Alertas"
+      ]
+    },
+    "ciclo_mlops_observable": {
+      "titulo": "Consolidar ciclo MLOps observable",
+      "tipo": "Recomendación",
+      "problema": "Hay despliegue gradual y métricas de producción.",
+      "solucion": "Cerrar el ciclo entre evaluación, despliegue, monitoreo y mejora con criterios de promoción y reversión documentados.",
+      "prioridad": "Alta",
+      "pasos": [
+        "Relacionar cada despliegue con su versión y evaluación.",
+        "Revisar alertas y resultados periódicamente.",
+        "Abrir acciones de mejora cuando se incumplan umbrales.",
+        "Mantener historial de decisiones y cambios."
+      ],
+      "componentes": [
+        "CI/CD",
+        "Registro de modelos",
+        "Monitoreo",
+        "Gestión de incidentes"
+      ]
+    },
+    "seleccion_api_calidad": {
+      "titulo": "Modelo recomendado: API gestionada orientada a calidad",
+      "tipo": "Selección de modelo",
+      "problema": "La generación de texto exige alta calidad y/o contexto extenso, y no se ha indicado que el procesamiento deba ser local.",
+      "solucion": "Recomendación inicial: evaluar GPT-5 mediante API como primera opción y Claude Sonnet como alternativa. No fijes la decisión solo por el nombre del modelo: ejecuta ambos con ejemplos reales y compara calidad, latencia, costo y límites de contexto.",
+      "prioridad": "Alta",
+      "componentes": [
+        "API de OpenAI (GPT-5)",
+        "API de Anthropic (Claude Sonnet)",
+        "Conjunto de evaluación versionado"
+      ],
+      "pasos": [
+        "Preparar 20–50 solicitudes representativas y sus criterios de aceptación.",
+        "Ejecutar exactamente las mismas pruebas con ambos candidatos.",
+        "Comparar calidad, latencia p95, costo por solicitud y manejo de casos límite.",
+        "Seleccionar el candidato que cumpla los umbrales; guardar el resultado de la evaluación."
+      ]
+    },
+    "seleccion_local_economica": {
+      "titulo": "Modelo recomendado: Qwen3-8B cuantizado para ejecución local",
+      "tipo": "Selección de modelo",
+      "problema": "Se prioriza bajo costo o control local, hay preferencia por pesos abiertos y la memoria GPU es limitada.",
+      "solucion": "Candidato inicial: Qwen3-8B en una variante cuantizada compatible con tu entorno. Si la VRAM no alcanza o la latencia es alta, prueba una variante menor; si la calidad no cumple, compara con un modelo abierto de mayor tamaño en el hardware disponible. La recomendación es un punto de partida que debe validarse con tus datos.",
+      "prioridad": "Alta",
+      "componentes": [
+        "Qwen3-8B cuantizado",
+        "Ollama o vLLM para servir el modelo, según el hardware",
+        "Medición de VRAM, tokens/s y latencia"
+      ],
+      "pasos": [
+        "Verificar VRAM disponible y sistema operativo.",
+        "Descargar una cuantización compatible con la memoria disponible.",
+        "Probar ejemplos reales y medir calidad, consumo de memoria y tokens por segundo.",
+        "Comparar con otro tamaño de modelo antes de desplegar."
+      ]
+    },
+    "seleccion_local_privacidad": {
+      "titulo": "Modelo recomendado: modelo de pesos abiertos autohospedado",
+      "tipo": "Selección de modelo",
+      "problema": "Los datos sensibles requieren control del entorno y se prefiere que el modelo se ejecute en infraestructura propia.",
+      "solucion": "Usa Qwen3-8B como candidato inicial autohospedado si el hardware lo soporta; evalúa una variante cuantizada para reducir memoria. Si la calidad requerida no se alcanza, compara otro tamaño o familia de modelo. No envíes datos sensibles a una API externa sin aprobación y revisión de privacidad.",
+      "prioridad": "Alta",
+      "componentes": [
+        "Qwen3-8B autohospedado",
+        "Ollama o vLLM",
+        "Control de acceso, cifrado y auditoría"
+      ],
+      "pasos": [
+        "Confirmar requisitos de privacidad y licencia del modelo.",
+        "Validar hardware y cuantización.",
+        "Probar el modelo con datos anonimizados o aprobados.",
+        "Asegurar que logs y métricas no expongan información sensible.",
+        "Documentar evaluación y controles antes de producción."
+      ]
+    },
+    "seleccion_modelo_baja_latencia": {
+      "titulo": "Modelo recomendado: candidato pequeño con servicio optimizado",
+      "tipo": "Selección de modelo",
+      "problema": "Se requiere baja latencia y se espera un alto volumen de solicitudes.",
+      "solucion": "Evalúa primero un modelo pequeño que cumpla la calidad mínima; para ejecución local, Qwen3-8B cuantizado puede ser un candidato inicial si el hardware lo soporta. Si la operación es gestionada, compara APIs de GPT-5 y Claude Sonnet midiendo latencia real. La selección depende de la carga y de la región de despliegue.",
+      "prioridad": "Alta",
+      "componentes": [
+        "Modelo candidato pequeño o cuantizado",
+        "Servidor de inferencia o API gestionada",
+        "Métricas p50/p95/p99 y solicitudes por segundo"
+      ],
+      "pasos": [
+        "Definir el objetivo de latencia y volumen concurrente.",
+        "Medir la latencia con una carga representativa.",
+        "Probar límites de concurrencia, batching y timeouts.",
+        "Elegir el modelo que cumpla latencia y calidad al menor costo total."
+      ]
+    }
+  },
+  "titulo": "Selección y despliegue de modelos de IA",
+  "hechos": {
+    "alto_volumen_solicitudes": {
+      "texto": "Se espera un alto volumen de solicitudes",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "calidad_critica": {
+      "texto": "La calidad de respuesta es crítica",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "caso_uso_llm": {
+      "texto": "Recomendación inicial de modelo para generación de texto",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "ciclo_mlops_observable": {
+      "texto": "Consolidar ciclo MLOps observable",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "clasificacion_tarea_generativa": {
+      "texto": "Tarea clasificada como generación de texto",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "comparar_calidad_fp16_int8_int4": {
+      "texto": "Comparar calidad entre precisiones",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "contexto_largo": {
+      "texto": "Se necesita una ventana de contexto larga",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "datos_evaluacion": {
+      "texto": "Existe un conjunto de datos de evaluación",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "datos_sensibles": {
+      "texto": "Los datos contienen información sensible",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "despliegue_canary_con_rollback": {
+      "texto": "Desplegar gradualmente con rollback",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "despliegue_produccion": {
+      "texto": "El modelo se desplegará en producción",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "drift_detectado": {
+      "texto": "Se detectó deriva de datos o rendimiento",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "establecer_umbral_calidad": {
+      "texto": "Definir umbrales de calidad",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "evaluacion_llm_reproducible": {
+      "texto": "Preparar evaluación reproducible",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "evaluar_cuantizacion": {
+      "texto": "Evaluar cuantización del modelo",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "evaluar_llm_autohospedado": {
+      "texto": "Evaluar un LLM autohospedado",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "gpu_disponible": {
+      "texto": "Hay una GPU disponible",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "latencia_estricta": {
+      "texto": "Se necesita baja latencia",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "modelo_abierto": {
+      "texto": "Se prefiere un modelo de pesos abiertos",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "optimizar_serving_y_batching": {
+      "texto": "Optimizar el servicio de inferencia",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "perfil_inferencia_eficiente": {
+      "texto": "Configurar perfil de inferencia eficiente",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "pipeline_mlops_versionado": {
+      "texto": "Crear pipeline MLOps versionado",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "presupuesto_bajo": {
+      "texto": "El presupuesto de inferencia es limitado",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "privacidad_datos": {
+      "texto": "Los datos requieren privacidad estricta",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "reentrenamiento_o_reversion_controlada": {
+      "texto": "Responder a deriva del modelo",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "registrar_metricas_coste_latencia_calidad": {
+      "texto": "Registrar métricas de producción",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "requisito_contexto_extenso": {
+      "texto": "Evaluar modelos con contexto largo",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "requisito_entorno_controlado": {
+      "texto": "Diseñar entorno controlado para datos sensibles",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "restriccion_memoria_gpu": {
+      "texto": "Evaluar la restricción de VRAM",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "seleccion_api_calidad": {
+      "texto": "Modelo recomendado: API gestionada orientada a calidad",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "seleccion_local_economica": {
+      "texto": "Modelo recomendado: Qwen3-8B cuantizado para ejecución local",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "seleccion_local_privacidad": {
+      "texto": "Modelo recomendado: modelo de pesos abiertos autohospedado",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "seleccion_modelo_baja_latencia": {
+      "texto": "Modelo recomendado: candidato pequeño con servicio optimizado",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "seleccionar_modelo_autohospedado_validado": {
+      "texto": "Seleccionar modelo autohospedado validado",
+      "tipo": "recomendacion",
+      "grupo": "Resultados y recomendaciones"
+    },
+    "tarea_generacion_texto": {
+      "texto": "La tarea principal es generar texto",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "validar_privacidad_y_control_acceso": {
+      "texto": "Validar privacidad y acceso en producción",
+      "tipo": "intermedio",
+      "grupo": "Evaluación y despliegue"
+    },
+    "versionado_modelos": {
+      "texto": "Existe versionado de modelos y artefactos",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    },
+    "vram_limitada": {
+      "texto": "La memoria VRAM es limitada",
+      "tipo": "entrada",
+      "grupo": "Requisitos y restricciones"
+    }
+  }
 }
