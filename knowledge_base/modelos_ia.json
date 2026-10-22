@@ -1,0 +1,4 @@
+{
+  "descripcion": "Chatbot interno sobre documentos confidenciales con poco hardware",
+  "hechos": ["quiere_generar_texto", "tiene_documentos_internos", "privacidad_estricta", "presupuesto_gpu_bajo"]
+}

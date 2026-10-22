@@ -1,0 +1,4 @@
+{
+  "descripcion": "Phishing que termina en malware y fuga de datos",
+  "hechos": ["correo_sospechoso", "clic_enlace", "proceso_desconocido", "trafico_saliente_alto", "login_pais_inusual", "intentos_login_fallidos"]
+}

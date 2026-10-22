@@ -1,0 +1,4 @@
+{
+  "descripcion": "Tienda en línea global con tráfico variable, contenedores y equipo pequeño",
+  "hechos": ["usuarios_globales", "baja_latencia", "alta_disponibilidad", "trafico_variable", "presupuesto_limitado", "equipo_pequeno", "app_contenedores"]
+}
